@@ -1,0 +1,5 @@
+*.o
+*.swp
+*-lexer.[ch]
+*-parser.[ch]
+ber-dump
