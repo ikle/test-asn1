@@ -219,20 +219,21 @@ static long ber_tag_number (long tag)
 
 static void ber_dump_prefix (int level, long tag, long len)
 {
-	const char *name;
+	const char *name = NULL;
 
 	indent (level);
 
 	switch (tag & 0xc0) {
-	/* case 0x00: universal */
+	case 0x00:
+		if ((name = ber_get_type_name (tag)) != NULL)
+			printf ("%s ", name);
+		break;
 	case 0x40:	printf ("application ");      break;
 	case 0x80:	printf ("context-specific "); break;
 	case 0xc0:	printf ("private");           break;
 	}
 
-	if ((name = ber_get_type_name (tag)) != NULL)
-		printf ("%s ", name);
-	else
+	if (name == NULL)
 		printf ("%ld ", ber_tag_number (tag));
 
 	if (len > 0)
