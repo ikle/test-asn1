@@ -139,13 +139,22 @@ static long ber_get_number (struct ber_input *o)
 
 static int ber_dump_oid (struct ber_input *o)
 {
+	int a;
 	long n;
+
+	if ((a = ber_get (o)) < 0)
+		return a;
+
+	if (a < 80)
+		printf ("%d.%d", a / 40, a % 40);
+	else
+		printf ("2.%d", a - 80);
 
 	while (o->len > 0)
 		if ((n = ber_get_number (o)) < 0)
 			return n;
 		else
-			printf ("%lu.", n);
+			printf (".%ld", n);
 
 	putchar ('\n');
 	return 0;
