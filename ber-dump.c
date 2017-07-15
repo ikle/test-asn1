@@ -188,6 +188,35 @@ static void indent (int level)
 		printf ("    ");
 }
 
+static long ber_tag_number (long tag)
+{
+	int base = tag & 0x1f;
+	long lo, hi;
+
+	if (base != 0x1f)
+		return base;
+
+	tag >>= 8;
+
+	if ((tag & 0x80) == 0)
+		return tag;
+
+	lo = tag &  0x7f;
+	hi = tag & ~0xff;
+
+	tag = (hi >> 1) | lo;
+
+	if ((tag & 0x4000) == 0)
+		return tag;
+
+	lo = tag &  0x3fff;
+	hi = tag & ~0x7fff;
+
+	tag = (hi >> 1) | lo;
+
+	return tag;
+}
+
 static void ber_dump_prefix (int level, long tag, long len)
 {
 	const char *name;
@@ -204,7 +233,7 @@ static void ber_dump_prefix (int level, long tag, long len)
 	if ((name = ber_get_type_name (tag)) != NULL)
 		printf ("%s ", name);
 	else
-		printf ("%lx ", tag & 0x1f);
+		printf ("%ld ", ber_tag_number (tag));
 
 	if (len > 0)
 		printf ("[%ld] ", len);
