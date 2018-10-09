@@ -83,10 +83,10 @@ static void asn1_dump_int (struct asn1_int *i)
 	}
 
 	p = i->n + i->count - 1;
-	printf ("%llx", *p);
+	printf ("%llx", (unsigned long long) *p);
 
 	for (--p; p >= i->n; --p)
-		printf ("%016llx", *p);
+		printf ("%016llx", (unsigned long long) *p);
 }
 
 static int ber_dump_int (struct ber_input *o)
