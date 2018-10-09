@@ -120,7 +120,7 @@ static int asn1_input_read (struct asn1_input *o, void *to, size_t count)
 	return count;
 }
 
-int asn1_input_gets (struct asn1_input *o, void *to, long count)
+long asn1_input_gets (struct asn1_input *o, void *to, long count)
 {
 	long total;
 	char *p;

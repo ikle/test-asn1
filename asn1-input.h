@@ -11,6 +11,6 @@ void asn1_input_close (struct asn1_input *o);
 
 int asn1_input_peek (struct asn1_input *o);
 int asn1_input_get  (struct asn1_input *o);
-int asn1_input_gets (struct asn1_input *o, void *to, long count);
+long asn1_input_gets (struct asn1_input *o, void *to, long count);
 
 #endif  /* _ASN1_INPUT_H */
