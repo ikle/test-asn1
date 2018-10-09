@@ -21,7 +21,7 @@ struct asn1_output *asn1_output_open (
 {
 	struct asn1_output *o;
 
-	assert (write != NULL);
+	assert (write != NULL);		// todo: EINVAL
 
 	if ((o = malloc (sizeof (*o))) == NULL)
 		return NULL;
@@ -53,6 +53,7 @@ static int asn1_output_write (struct asn1_output *o)
 	if (ret < 0)
 		return ret;
 
+	// todo: check res < size of buffer or ERANGE/EINVAL
 	o->head += ret;
 
 	assert (o->head <= o->tail);
@@ -102,4 +103,9 @@ int asn1_output_put (struct asn1_output *o, int a)
 		return ret;
 
 	return a;
+}
+
+long asn1_output_puts (struct asn1_input *o, const void *from, long count)
+{
+	// todo: implement it
 }

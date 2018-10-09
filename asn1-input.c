@@ -30,7 +30,7 @@ struct asn1_input *asn1_input_open (
 {
 	struct asn1_input *o;
 
-	assert (read != NULL);
+	assert (read != NULL);	// todo: EINVAL
 
 	if ((o = malloc (sizeof (*o))) == NULL)
 		return NULL;
@@ -70,7 +70,7 @@ static int asn1_input_fetch (struct asn1_input *o)
 	if (ret == 0)
 		return -ENODATA;
 
-	assert (ret <= ASN1_BUFFER_SIZE);
+	assert (ret <= ASN1_BUFFER_SIZE);	// todo: ERANGE/EINVAL
 
 	o->head = o->buffer;
 	o->tail = o->buffer + ret;
