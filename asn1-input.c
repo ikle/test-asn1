@@ -70,7 +70,6 @@ static int asn1_input_fetch (struct asn1_input *o)
 	if (ret == 0)
 		return -ENODATA;
 
-
 	assert (ret <= ASN1_BUFFER_SIZE);
 
 	o->head = o->buffer;
