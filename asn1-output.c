@@ -50,12 +50,7 @@ static int asn1_output_write (struct asn1_output *o)
 	assert (o != NULL);
 	assert (o->head < o->tail);
 
-	do {
-		ret = o->write (o->head, o->tail - o->head, o->ctx);
-	}
-	while (ret == 0);
-
-	if (ret < 0)
+	if ((ret = o->write (o->head, o->tail - o->head, o->ctx)) < 0)
 		return ret;
 
 	// todo: check res < size of buffer or ERANGE/EINVAL
