@@ -13,10 +13,13 @@
 
 int asn1_int_init (struct asn1_int *i, int count)
 {
+	i->count = count;
+
+	errno = 0;
+
 	if ((i->n = malloc (count * sizeof (*i->n))) == NULL)
 		return -errno;
 
-	i->count = count;
 	return 0;
 }
 
