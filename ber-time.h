@@ -1,5 +1,9 @@
 /*
  * ASN.1 BER time helpers
+ *
+ * Copyright (c) 2016-2021 Alexei A. Smekalkine <ikle@ikle.ru>
+ *
+ * SPDX-License-Identifier: BSD-2-Clause
  */
 
 #ifndef _BER_TIME_H
