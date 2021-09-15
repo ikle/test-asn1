@@ -26,11 +26,8 @@ int ber_get_int (struct ber_input *o, struct asn1_int *i)
 
 	for (
 		p = i->n + len - 1, n = sign ? ~(asn1_limb_t) 0 : 0;
-		o->len > 0;
+		(a = ber_get (o)) >= 0;
 	) {
-		if ((a = ber_get (o)) < 0)
-			return a;
-
 		n = (n << 8) | a;
 
 		if (o->len % ASN1_LIMB_SIZE == 0) {
@@ -39,5 +36,5 @@ int ber_get_int (struct ber_input *o, struct asn1_int *i)
 		}
 	}
 
-	return 0;
+	return o->len == 0 ? 0 : a;
 }
