@@ -16,7 +16,7 @@ int ber_get_int (struct ber_input *o, struct asn1_int *i)
 	long len = ROUND_UP (o->len, sizeof (*i->n));
 	asn1_limb_t n, *p;
 
-	if ((a = asn1_int_init (i, len)) < 0)
+	if ((a = asn1_int_init (i, len)) < 0 || len == 0)
 		return a;
 
 	if ((a = ber_peek (o)) < 0)
