@@ -109,7 +109,7 @@ int asn1_output_put (struct asn1_output *o, int a)
 	return a;
 }
 
-long asn1_output_puts (struct asn1_input *o, const void *from, long count)
+long asn1_output_puts (struct asn1_output *o, const void *from, long count)
 {
 	// todo: implement it
 }
