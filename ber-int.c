@@ -19,15 +19,13 @@ int ber_get_int (struct ber_input *o, struct asn1_int *i)
 	if ((a = asn1_int_init (i, len)) < 0 || len == 0)
 		return a;
 
-	if ((a = ber_peek (o)) < 0)
+	if ((a = ber_get (o)) < 0)
 		return a;
 
 	sign = (a & 0x80) != 0;
+	p = i->n + len - 1, n = sign ? ~(asn1_limb_t) 0 : 0;
 
-	for (
-		p = i->n + len - 1, n = sign ? ~(asn1_limb_t) 0 : 0;
-		(a = ber_get (o)) >= 0;
-	) {
+	do {
 		n = (n << 8) | a;
 
 		if (o->len % ASN1_LIMB_SIZE == 0) {
@@ -35,6 +33,7 @@ int ber_get_int (struct ber_input *o, struct asn1_int *i)
 			--p;
 		}
 	}
+	while ((a = ber_get (o)) >= 0);
 
 	return o->len == 0 ? 0 : a;
 }
