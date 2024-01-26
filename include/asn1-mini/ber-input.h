@@ -20,7 +20,11 @@ struct ber_input {
 
 #define BER_LEN_INDEFINITE  LONG_MAX
 
-int ber_peek (struct ber_input *o);
+static inline int ber_peek (struct ber_input *o)
+{
+	return asn1_input_peek (o->in);
+}
+
 int ber_get  (struct ber_input *o);
 
 /* NOTE: we use in-wire format of tag loaded into LE 32-bit unit */

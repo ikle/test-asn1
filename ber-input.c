@@ -11,11 +11,6 @@
 
 #include <asn1-mini/ber-input.h>
 
-int ber_peek (struct ber_input *o)
-{
-	return asn1_input_peek (o->in);
-}
-
 int ber_get (struct ber_input *o)
 {
 	int a;
