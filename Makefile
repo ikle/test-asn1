@@ -1,17 +1,8 @@
-TARGETS = ber-dump
+DESCRIPTION = ASN.1 BER Helper Library
+URL = https://github.com/ikle/asn1-mini
 
-CFLAGS ?= -O6
+LIBNAME = asn1-mini
+LIBVER  = 0
+LIBREV  = 0.1
 
-all: $(TARGETS)
-
-clean:
-	rm -f *.o $(TARGETS)
-
-PREFIX ?= /usr/local
-
-install: $(TARGETS)
-	install -D -d $(DESTDIR)/$(PREFIX)/bin
-	install -s -m 0755 $^ $(DESTDIR)/$(PREFIX)/bin
-
-ber-dump: asn1-input.o asn1-int.o
-ber-dump: ber-input.o ber-int.o ber-time.o
+include make-core.mk
