@@ -1,7 +1,7 @@
 /*
  * ASN.1 BER input helpers
  *
- * Copyright (c) 2016-2021 Alexei A. Smekalkine <ikle@ikle.ru>
+ * Copyright (c) 2016-2024 Alexei A. Smekalkine <ikle@ikle.ru>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -45,6 +45,20 @@ int ber_get (struct ber_input *o)
 		if ((a & 0x80) == 0)		\
 			return tag;		\
 	} while (0)
+
+long ber_get_blob (struct ber_input *o, void *data, long count)
+{
+	unsigned char *dst = data;
+	long i;
+	int a;
+
+	for (i = 0; i < count; ++i)
+		if ((a = ber_get (o)) < 0)
+			return a;
+		else
+			dst[i] = a;
+	return i;
+}
 
 /* NOTE: we use in-wire format of tag loaded into LE 32-bit unit */
 long ber_get_tag (struct ber_input *o)
