@@ -1,7 +1,7 @@
 /*
  * ASN.1 DER encoding helpers
  *
- * Copyright (c) 2016-2021 Alexei A. Smekalkine <ikle@ikle.ru>
+ * Copyright (c) 2016-2024 Alexei A. Smekalkine <ikle@ikle.ru>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -25,6 +25,7 @@ enum {
 	ASN1_UTF8	= 0x0c,
 	ASN1_SEQ	= 0x10,
 	ASN1_SET	= 0x11,
+	ASN1_NUMSTR	= 0x12,
 	ASN1_PRINT	= 0x13,
 	ASN1_ASCII	= 0x16,
 	ASN1_UTCTIME	= 0x17,
@@ -43,6 +44,7 @@ static const char *ber_get_type_name (int type)
 	case ASN1_UTF8:		return "UTF8 string";
 	case ASN1_SEQ:		return "list";
 	case ASN1_SET:		return "set";
+	case ASN1_NUMSTR:	return "numeric string";
 	case ASN1_PRINT:	return "printable string";
 	case ASN1_ASCII:	return "ASCII string";
 	case ASN1_UTCTIME:	return "UTC time";
@@ -286,6 +288,7 @@ static int ber_dump_primitive (struct ber_input *o, long tag)
 	case ASN1_INT:
 		return ber_dump_int    (o);
 	case ASN1_UTF8:
+	case ASN1_NUMSTR:
 	case ASN1_PRINT:
 	case ASN1_ASCII:
 		return ber_dump_string (o);
