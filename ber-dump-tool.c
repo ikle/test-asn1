@@ -283,21 +283,15 @@ static int ber_dump_primitive (struct ber_input *o, long tag)
 	printf ("= ");
 
 	switch (tag) {
-	case ASN1_BOOL:
-		return ber_dump_bool   (o);
-	case ASN1_INT:
-		return ber_dump_int    (o);
+	case ASN1_BOOL:		return ber_dump_bool   (o);
+	case ASN1_INT:		return ber_dump_int    (o);
 	case ASN1_UTF8:
 	case ASN1_NUMSTR:
 	case ASN1_PRINT:
-	case ASN1_ASCII:
-		return ber_dump_string (o);
-	case ASN1_UTCTIME:
-		return ber_dump_time   (o, 0);
-	case ASN1_GENTIME:
-		return ber_dump_time   (o, 1);
-	case ASN1_OID:
-		return ber_dump_oid    (o);
+	case ASN1_ASCII:	return ber_dump_string (o);
+	case ASN1_UTCTIME:	return ber_dump_time   (o, 0);
+	case ASN1_GENTIME:	return ber_dump_time   (o, 1);
+	case ASN1_OID:		return ber_dump_oid    (o);
 	}
 
 	return ber_dump_blob (o);
