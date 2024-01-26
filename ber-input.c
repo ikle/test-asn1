@@ -19,7 +19,9 @@
 			return tag;		\
 	} while (0)
 
-/* NOTE: we use in-wire format of tag loaded into LE 32-bit unit */
+/*
+ * NOTE: we use in-wire format of tag loaded into LE 32-bit unit
+ */
 long ber_get_tag (struct ber_input *o)
 {
 	long tag;
@@ -45,8 +47,7 @@ long ber_get_len (struct ber_input *o)
 	int a, count;
 	long len;
 
-	if ((a = ber_get (o)) < 0 ||
-	    (a & 0x80) == 0)
+	if ((a = ber_get (o)) < 0 || (a & 0x80) == 0)
 		return a;
 
 	if (a == 0x80)

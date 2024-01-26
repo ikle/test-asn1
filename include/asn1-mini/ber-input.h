@@ -39,7 +39,9 @@ static inline int ber_get (struct ber_input *o)
 	return a;
 }
 
-/* NOTE: we use in-wire format of tag loaded into LE 32-bit unit */
+/*
+ * NOTE: we use in-wire format of tag loaded into LE 32-bit unit
+ */
 long ber_get_tag (struct ber_input *o);
 long ber_get_len (struct ber_input *o);
 
