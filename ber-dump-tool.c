@@ -56,14 +56,14 @@ static const char *ber_get_type_name (int type)
 
 static int ber_dump_bool (struct ber_input *o)
 {
-	int a;
+	int a, v;
 
-	if ((a = ber_get (o)) < 0)
-		return a;
+	for (v = 0; o->len > 0; v |= a)
+		if ((a = ber_get (o)) < 0)
+			return a;
 
-	printf (a != 0 ? "true\n" : "false\n");
-
-	return ber_skip (o);
+	printf (v != 0 ? "true\n" : "false\n");
+	return 0;
 }
 
 static void asn1_dump_int (struct asn1_int *i)
