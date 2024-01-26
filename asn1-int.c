@@ -1,7 +1,7 @@
 /*
- * ASN.1 integer
+ * ASN.1 Integer
  *
- * Copyright (c) 2016-2021 Alexei A. Smekalkine <ikle@ikle.ru>
+ * Copyright (c) 2016-2024 Alexei A. Smekalkine <ikle@ikle.ru>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -9,7 +9,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include "asn1-int.h"
+#include <asn1-mini/asn1-int.h>
 
 int asn1_int_init (struct asn1_int *i, int count)
 {
