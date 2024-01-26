@@ -22,7 +22,8 @@ static int ber_get_ascii_number (struct ber_input *o, unsigned count)
 	for (n = 0; count > 0; --count)
 		if ((a = ber_get (o)) < 0)
 			return a;
-		else if (ber_is_digit (a))
+		else
+		if (ber_is_digit (a))
 			n = n * 10 + (a - 0x30);
 		else
 			return -EINVAL;
@@ -104,7 +105,6 @@ int ber_get_utctime (struct ber_input *o, struct asn1_time *t)
 		return ret;
 
 	t->year += (t->year > 50) ? 1900 : 2000;
-
 	return 0;
 }
 
@@ -119,6 +119,5 @@ int ber_get_gentime (struct ber_input *o, struct asn1_time *t)
 		return ret;
 
 	t->year += century * 100;
-
 	return 0;
 }
