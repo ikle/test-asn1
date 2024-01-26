@@ -9,8 +9,12 @@
 #ifndef _ASN1_TIME_H
 #define _ASN1_TIME_H  1
 
+#include <stddef.h>
+
 struct asn1_time {
 	int year, mon, day, hour, min, sec, shift;
 };
+
+int asn1_show_time (char *buf, size_t len, struct asn1_time *t);
 
 #endif  /* _ASN1_TIME_H */
