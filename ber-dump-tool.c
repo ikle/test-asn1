@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <asn1-mini/ber-input.h>
+#include <asn1-mini/ber-bool.h>
 #include <asn1-mini/ber-int.h>
 #include <asn1-mini/ber-time.h>
 
@@ -56,11 +56,10 @@ static const char *ber_get_type_name (int type)
 
 static int ber_dump_bool (struct ber_input *o)
 {
-	int a, v;
+	int v;
 
-	for (v = 0; o->len > 0; v |= a)
-		if ((a = ber_get (o)) < 0)
-			return a;
+	if ((v = ber_get_bool (o)) < 0)
+		return v;
 
 	printf (v != 0 ? "true\n" : "false\n");
 	return 0;
