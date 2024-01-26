@@ -43,6 +43,17 @@ static inline int ber_get (struct ber_input *o)
 long ber_get_tag (struct ber_input *o);
 long ber_get_len (struct ber_input *o);
 
+static inline int ber_skip (struct ber_input *o)
+{
+	int a;
+
+	while (o->len > 0)
+		if ((a = ber_get (o)) < 0)
+			return a;
+
+	return 0;
+}
+
 long ber_get_blob (struct ber_input *o, void *data, long count);
 
 #endif  /* _BER_INPUT_H */

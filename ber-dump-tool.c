@@ -54,17 +54,6 @@ static const char *ber_get_type_name (int type)
 	return NULL;
 }
 
-static int ber_skip (struct ber_input *o)
-{
-	int a;
-
-	while (o->len > 0)
-		if ((a = ber_get (o)) < 0)
-			return a;
-
-	return 0;
-}
-
 static int ber_dump_bool (struct ber_input *o)
 {
 	int a;
