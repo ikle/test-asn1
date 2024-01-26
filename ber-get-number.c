@@ -6,7 +6,11 @@
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
+#include <limits.h>
+
 #include <asn1-mini/ber-number.h>
+
+#define NDIGITS  ((sizeof (long) * CHAR_BIT - 1) / 7)
 
 long ber_get_number (struct ber_input *o)
 {
@@ -14,7 +18,7 @@ long ber_get_number (struct ber_input *o)
 	long n;
 	int processed;
 
-	for (n = 0, processed = 0; processed < 4; ++processed) {
+	for (n = 0, processed = 0; processed < NDIGITS; ++processed) {
 		if ((a = ber_get (o)) < 0)
 			return a;
 
