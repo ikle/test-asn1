@@ -10,7 +10,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "ber-input.h"
+#include <asn1-mini/ber-input.h>
+
 #include "ber-int.h"
 #include "ber-time.h"
 

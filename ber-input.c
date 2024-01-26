@@ -1,5 +1,5 @@
 /*
- * ASN.1 BER input helpers
+ * ASN.1 BER Input helpers
  *
  * Copyright (c) 2016-2024 Alexei A. Smekalkine <ikle@ikle.ru>
  *
@@ -10,7 +10,7 @@
 #include <errno.h>
 #include <stddef.h>
 
-#include "ber-input.h"
+#include <asn1-mini/ber-input.h>
 
 int ber_peek (struct ber_input *o)
 {

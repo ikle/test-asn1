@@ -10,8 +10,7 @@
 #define _BER_INT_H  1
 
 #include <asn1-mini/asn1-int.h>
-
-#include "ber-input.h"
+#include <asn1-mini/ber-input.h>
 
 int ber_get_int (struct ber_input *o, struct asn1_int *i);
 

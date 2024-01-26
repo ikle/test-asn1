@@ -1,5 +1,5 @@
 /*
- * ASN.1 BER input helpers
+ * ASN.1 BER Input helpers
  *
  * Copyright (c) 2018-2024 Alexei A. Smekalkine <ikle@ikle.ru>
  *
