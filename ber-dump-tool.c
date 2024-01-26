@@ -12,8 +12,7 @@
 
 #include <asn1-mini/ber-input.h>
 #include <asn1-mini/ber-int.h>
-
-#include "ber-time.h"
+#include <asn1-mini/ber-time.h>
 
 enum {
 	ASN1_EOC	= 0x00,

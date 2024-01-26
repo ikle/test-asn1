@@ -1,14 +1,14 @@
 /*
- * ASN.1 time helpers
+ * ASN.1 Time helpers
  *
- * Copyright (c) 2016-2021 Alexei A. Smekalkine <ikle@ikle.ru>
+ * Copyright (c) 2016-2024 Alexei A. Smekalkine <ikle@ikle.ru>
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
 #include <errno.h>
 
-#include "ber-time.h"
+#include <asn1-mini/ber-time.h>
 
 static int ber_is_digit (int a)
 {
