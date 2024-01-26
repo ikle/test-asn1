@@ -59,7 +59,7 @@ static int ber_skip (struct ber_input *o)
 	int a;
 
 	while (o->len > 0)
-		if ((a = asn1_input_get (o->in)) < 0)
+		if ((a = ber_get (o)) < 0)
 			return a;
 
 	return 0;
