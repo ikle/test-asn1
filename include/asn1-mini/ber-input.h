@@ -9,6 +9,7 @@
 #ifndef _BER_INPUT_H
 #define _BER_INPUT_H  1
 
+#include <errno.h>
 #include <limits.h>
 
 #include <asn1-mini/asn1-input.h>
@@ -25,7 +26,18 @@ static inline int ber_peek (struct ber_input *o)
 	return asn1_input_peek (o->in);
 }
 
-int ber_get  (struct ber_input *o);
+static inline int ber_get (struct ber_input *o)
+{
+	int a;
+
+	if (o->len <= 0)
+		return -ENODATA;
+
+	if ((a = asn1_input_get (o->in)) >= 0 && o->len != BER_LEN_INDEFINITE)
+		--o->len;
+
+	return a;
+}
 
 /* NOTE: we use in-wire format of tag loaded into LE 32-bit unit */
 long ber_get_tag (struct ber_input *o);

@@ -6,24 +6,7 @@
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
-#include <errno.h>
-#include <stddef.h>
-
 #include <asn1-mini/ber-input.h>
-
-int ber_get (struct ber_input *o)
-{
-	int a;
-
-	if (o->len <= 0)
-		return -ENODATA;
-
-	if ((a = asn1_input_get (o->in)) >= 0 &&
-	    o->len != BER_LEN_INDEFINITE)
-		--o->len;
-
-	return a;
-}
 
 long ber_get_blob (struct ber_input *o, void *data, long count)
 {
