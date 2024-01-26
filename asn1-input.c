@@ -65,7 +65,6 @@ static int asn1_input_fetch (struct asn1_input *o)
 {
 	int ret;
 
-	assert (o != NULL);
 	assert (asn1_input_available (o) == 0);
 
 	if ((ret = o->read (o->buffer, ASN1_BUFFER_SIZE, o->ctx)) < 0)
@@ -86,8 +85,6 @@ int asn1_input_peek (struct asn1_input *o)
 {
 	int ret;
 
-	assert (o != NULL);
-
 	if (asn1_input_available (o) == 0 &&
 	    (ret = asn1_input_fetch (o)) < 0)
 		return ret;
@@ -98,8 +95,6 @@ int asn1_input_peek (struct asn1_input *o)
 int asn1_input_get (struct asn1_input *o)
 {
 	int a;
-
-	assert (o != NULL);
 
 	if ((a = asn1_input_peek (o)) >= 0)
 		++o->head;
