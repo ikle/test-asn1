@@ -11,7 +11,7 @@
 
 #include <limits.h>
 
-#include "asn1-input.h"
+#include <asn1-mini/asn1-input.h>
 
 struct ber_input {
 	struct asn1_input *in;

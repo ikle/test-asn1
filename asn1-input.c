@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "asn1-input.h"
+#include <asn1-mini/asn1-input.h>
 
 struct asn1_input {
 	unsigned char *buffer;
