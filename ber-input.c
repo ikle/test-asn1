@@ -35,17 +35,6 @@ int ber_get (struct ber_input *o)
 	return a;
 }
 
-#define BER_GET_TAG_EXTRA(n) 			\
-	do {					\
-		if ((a = ber_get (o)) < 0)	\
-			return a;		\
-						\
-		tag |= a << ((n) * 8);		\
-						\
-		if ((a & 0x80) == 0)		\
-			return tag;		\
-	} while (0)
-
 long ber_get_blob (struct ber_input *o, void *data, long count)
 {
 	unsigned char *dst = data;
@@ -59,6 +48,17 @@ long ber_get_blob (struct ber_input *o, void *data, long count)
 			dst[i] = a;
 	return i;
 }
+
+#define BER_GET_TAG_EXTRA(n) 			\
+	do {					\
+		if ((a = ber_get (o)) < 0)	\
+			return a;		\
+						\
+		tag |= a << ((n) * 8);		\
+						\
+		if ((a & 0x80) == 0)		\
+			return tag;		\
+	} while (0)
 
 /* NOTE: we use in-wire format of tag loaded into LE 32-bit unit */
 long ber_get_tag (struct ber_input *o)
