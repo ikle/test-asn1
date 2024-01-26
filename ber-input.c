@@ -6,7 +6,6 @@
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
-#include <assert.h>
 #include <errno.h>
 #include <stddef.h>
 
@@ -14,16 +13,12 @@
 
 int ber_peek (struct ber_input *o)
 {
-	assert (o != NULL);
-
 	return asn1_input_peek (o->in);
 }
 
 int ber_get (struct ber_input *o)
 {
 	int a;
-
-	assert (o != NULL);
 
 	if (o->len <= 0)
 		return -ENODATA;
@@ -66,8 +61,6 @@ long ber_get_tag (struct ber_input *o)
 	long tag;
 	int a;
 
-	assert (o != NULL);
-
 	if ((a = ber_get (o)) < 0)
 		return a;
 
@@ -87,8 +80,6 @@ long ber_get_len (struct ber_input *o)
 {
 	int a, count;
 	long len;
-
-	assert (o != NULL);
 
 	if ((a = ber_get (o)) < 0 ||
 	    (a & 0x80) == 0)
