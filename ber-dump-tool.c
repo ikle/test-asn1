@@ -12,6 +12,7 @@
 
 #include <asn1-mini/ber-bool.h>
 #include <asn1-mini/ber-int.h>
+#include <asn1-mini/ber-number.h>
 #include <asn1-mini/ber-time.h>
 
 enum {
@@ -110,25 +111,6 @@ static int ber_dump_blob (struct ber_input *o)
 
 	putchar ('\n');
 	return 0;
-}
-
-static long ber_get_number (struct ber_input *o)
-{
-	int a;
-	long n;
-	int processed;
-
-	for (n = 0, processed = 0; processed < 4; ++processed) {
-		if ((a = ber_get (o)) < 0)
-			return a;
-
-		n = (n << 7) | (a & 0x7f);
-
-		if ((a & 0x80) == 0)
-			return n;
-	}
-
-	return -EPROTONOSUPPORT;
 }
 
 static int ber_dump_oid (struct ber_input *o)
