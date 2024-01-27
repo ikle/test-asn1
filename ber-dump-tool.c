@@ -221,11 +221,11 @@ static void ber_dump_prefix (int level, long tag, long len)
 	if (name == NULL)
 		printf ("%ld ", ber_tag_number (tag));
 
+	if (len == BER_LEN_INDEFINITE)
+		printf ("[] ");
+	else
 	if (len > 0)
 		printf ("[%ld] ", len);
-	else
-	if (len < 0)
-		printf ("[] ");
 }
 
 static int ber_dump (struct ber_input *o, int level);
