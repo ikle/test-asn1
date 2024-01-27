@@ -223,7 +223,8 @@ static void ber_dump_prefix (int level, long tag, long len)
 
 	if (len > 0)
 		printf ("[%ld] ", len);
-	else if (len < 0)
+	else
+	if (len < 0)
 		printf ("[] ");
 }
 
