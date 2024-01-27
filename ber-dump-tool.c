@@ -202,11 +202,9 @@ static long ber_tag_number (long tag)
 	return tag;
 }
 
-static void ber_dump_prefix (int level, long tag, long len)
+static void ber_dump_prefix (long tag, long len)
 {
 	const char *name = NULL;
-
-	indent (level);
 
 	switch (tag & 0xc0) {
 	case 0x00:
@@ -276,7 +274,7 @@ static int ber_dump (struct ber_input *o, int level)
 	if ((tag = ber_get_head (o, &box)) <= 0)
 		return tag;
 
-	ber_dump_prefix (level, tag, box.len);
+	indent (level); ber_dump_prefix (tag, box.len);
 
 	if ((tag & 0x20) != 0)
 		return ber_dump_constructed (&box, level);
