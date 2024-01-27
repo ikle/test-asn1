@@ -270,28 +270,13 @@ static int ber_dump_primitive (struct ber_input *o, long tag)
 
 static int ber_dump (struct ber_input *o, int level)
 {
-	long tag, len;
+	long tag;
 	struct ber_input box;
 
-	if ((tag = ber_get_tag (o)) < 0)
+	if ((tag = ber_get_head (o, &box)) <= 0)
 		return tag;
 
-	if ((len = ber_get_len (o)) < 0)
-		return len;
-
-	if (len > o->len)
-		return -ENODATA;
-
-	if (tag == ASN1_EOC)  /* end of content */
-		return ber_skip (o);
-
-	box.in  = o->in;
-	box.len = len;
-
-	if (o->len != BER_LEN_INDEFINITE)
-		o->len -= len;
-
-	ber_dump_prefix (level, tag, len);
+	ber_dump_prefix (level, tag, box.len);
 
 	if ((tag & 0x20) != 0)
 		return ber_dump_constructed (&box, level);

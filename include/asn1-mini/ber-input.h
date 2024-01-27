@@ -45,6 +45,13 @@ static inline int ber_get (struct ber_input *o)
 long ber_get_tag (struct ber_input *o);
 long ber_get_len (struct ber_input *o);
 
+/*
+ * Returns zero and skips input on EOC (End-of-Content), negative value on
+ * error, or tag > 0 and child input on success (and reduce input length by
+ * child length).
+ */
+long ber_get_head (struct ber_input *o, struct ber_input *child);
+
 static inline int ber_skip (struct ber_input *o)
 {
 	int a;
