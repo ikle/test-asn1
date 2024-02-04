@@ -33,7 +33,7 @@ int der_pull_len_##l##_##h (struct der_window *o, size_t *len)		\
 {									\
 	unsigned char *head = o->head + 1 + n;				\
 									\
-	if (o->head[0] != (0x81 + n) || head > o->tail)			\
+	if (o->head[0] != (0x80 + n) || head > o->tail)			\
 		return 0;						\
 									\
 	*len = der_peek_len_##n (o);					\
