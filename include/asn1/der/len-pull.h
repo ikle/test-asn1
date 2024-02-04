@@ -53,12 +53,7 @@ int der_pull_len_##l##_##h (struct der_window *o, size_t *len)		\
 }
 
 DER_DEFINE_LEN_PULL_COMP (0,  7, 8)
-
 DER_DEFINE_LEN_PULL_COMP (0,  8, 16)
-DER_DEFINE_LEN_PULL_COMP (7,  8, 16)
-
 DER_DEFINE_LEN_PULL_COMP (0, 16, 24)
-DER_DEFINE_LEN_PULL_COMP (7, 16, 24)
-DER_DEFINE_LEN_PULL_COMP (8, 16, 24)
 
 #endif  /* ASN1_DER_LEN_PULL_H */
