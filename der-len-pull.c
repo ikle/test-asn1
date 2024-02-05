@@ -18,9 +18,8 @@
  */
 int der_pull_len_4g (struct der_window *o, size_t *len)
 {
-	unsigned char *head = o->head + 1, count;
-	size_t x;
-	int i;
+	unsigned char *head = o->head + 1;
+	size_t count, x, i;
 
 	if (head > o->tail || o->head[0] == 0x80)  /* reject indefinite */
 		return 0;
