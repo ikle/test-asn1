@@ -34,7 +34,7 @@ int der_pull_len_4g (struct der_window *o, size_t *len)
 	if ((count = o->head[0] & 0x7f) > 4 || (head += count) > o->tail)
 		return 0;
 
-	for (x = o->head[1], i = 1; i < count; ++i)
+	for (x = o->head[0 + 1], i = 1; i < count; ++i)
 		x = (x << 8) | o->head[i + 1];
 
 	*len = x;
