@@ -19,12 +19,12 @@
 									\
 static inline int der_match_tag_##n (struct der_window *o, type tag)	\
 {									\
-	unsigned char *head = o->head + n;				\
+	size_t avail = o->tail - o->head;				\
 									\
-	if (head > o->tail || der_peek_tag_##n (o) != tag)		\
+	if (avail < n || der_peek_tag_##n (o) != tag)			\
 		return 0;						\
 									\
-	o->head = head;							\
+	o->head += n;							\
 	return 1;							\
 }
 
