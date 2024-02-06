@@ -6,12 +6,23 @@
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
+#include <stdint.h>
+
 #include <asn1/der/len-pull.h>
 
+#if SIZE_MAX >= 18446744073709551615ull
+#	define LEN_MAX  8
+
+#elif SIZE_MAX >= 4294967295ul
+#	define LEN_MAX  4
+#else
+#	define LEN_MAX  2
+#endif
+
 /*
- * Generic der_pull_len_0_32 variant
+ * Generic non-inline length fetcher, returns non-zero on success
  */
-int der_pull_len_4g (struct der_window *o, size_t *len)
+int der_pull_len (struct der_window *o, size_t *len)
 {
 	unsigned char *head = o->head + 1;
 	size_t count, x, i;
@@ -25,7 +36,7 @@ int der_pull_len_4g (struct der_window *o, size_t *len)
 		return 1;
 	}
 
-	if ((count = o->head[0] & 0x7f) > 4 || (head += count) > o->tail)
+	if ((count = o->head[0] & 0x7f) > LEN_MAX || (head += count) > o->tail)
 		return 0;
 
 	for (x = o->head[0 + 1], i = 1; i < count; ++i)

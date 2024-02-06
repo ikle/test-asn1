@@ -11,6 +11,14 @@
 
 #include <asn1/der/len-peek.h>
 
+/*
+ * Generic non-inline length fetcher, returns non-zero on success
+ */
+int der_pull_len (struct der_window *o, size_t *len);
+
+/*
+ * Inline length fetchers
+ */
 static inline int der_pull_len_0_7 (struct der_window *o, size_t *len)
 {
 	unsigned char *head = o->head + 1;
@@ -22,11 +30,6 @@ static inline int der_pull_len_0_7 (struct der_window *o, size_t *len)
 	o->head = head;
 	return 1;
 }
-
-/*
- * Generic non-inline der_pull_len_0_32 variant
- */
-int der_pull_len_4g (struct der_window *o, size_t *len);
 
 /*
  * Note, o->head[0] must be accessible on entry
