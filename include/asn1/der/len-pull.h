@@ -21,13 +21,13 @@ int der_pull_len (struct der_window *o, size_t *len);
  */
 static inline int der_pull_len_0_7 (struct der_window *o, size_t *len)
 {
-	unsigned char *head = o->head + 1;
+	size_t avail = o->tail - o->head;
 
-	if (head > o->tail || o->head[0] >= 0x80)
+	if (avail < 1 || o->head[0] >= 0x80)
 		return 0;
 
 	*len = o->head[0];
-	o->head = head;
+	o->head += 1;
 	return 1;
 }
 
@@ -39,13 +39,13 @@ static inline int der_pull_len_0_7 (struct der_window *o, size_t *len)
 static inline								\
 int der_pull_len_##l##_##h (struct der_window *o, size_t *len)		\
 {									\
-	unsigned char *head = o->head + 1 + n;				\
+	size_t avail = o->tail - o->head;				\
 									\
-	if (o->head[0] != (0x80 + n) || head > o->tail)			\
+	if (o->head[0] != (0x80 + n) || avail < (1 + n))		\
 		return 0;						\
 									\
 	*len = der_peek_len_##n (o);					\
-	o->head = head;							\
+	o->head += 1 + n;						\
 	return 1;							\
 }
 
