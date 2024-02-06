@@ -6,12 +6,7 @@
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
-#include <asn1/der/core.h>
-
-#if 1  /* temporary, for test only */
-#include <asn1/der/tag-match.h>
 #include <asn1/der/len-pull.h>
-#endif
 
 /*
  * Generic der_pull_len_0_32 variant

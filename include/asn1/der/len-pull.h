@@ -24,6 +24,11 @@ static inline int der_pull_len_0_7 (struct der_window *o, size_t *len)
 }
 
 /*
+ * Generic non-inline der_pull_len_0_32 variant
+ */
+int der_pull_len_4g (struct der_window *o, size_t *len);
+
+/*
  * Note, o->head[0] must be accessible on entry
  */
 #define DER_DEFINE_LEN_PULL(n, l, h)					\
