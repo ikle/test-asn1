@@ -6,8 +6,6 @@
  * SPDX-License-Identifier: BSD-2-Clause
  */
 
-#include <stdint.h>
-
 #include <asn1/der/len-pull.h>
 
 #if SIZE_MAX >= 18446744073709551615ull
