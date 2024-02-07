@@ -33,4 +33,15 @@ DER_DEFINE_TAG_MATCH (2, uint_fast16_t)
 DER_DEFINE_TAG_MATCH (3, uint_fast32_t)
 DER_DEFINE_TAG_MATCH (4, uint_fast32_t)
 
+/*
+ * Note, this function should be used with compile-constant tag value
+ */
+static inline int der_match_tag (struct der_window *o, uint_fast32_t tag)
+{
+	return	tag <= 255u       ? der_match_tag_1 (o, tag) :
+		tag <= 65535u     ? der_match_tag_2 (o, tag) :
+		tag <= 16777215ul ? der_match_tag_3 (o, tag) :
+		/* otherwise */     der_match_tag_4 (o, tag) ;
+}
+
 #endif  /* ASN1_DER_TAG_MATCH_H */
